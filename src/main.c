@@ -5,6 +5,7 @@
 #undef main
 #endif
 #include <stdio.h>
+#include <stdlib.h>
 #include <stdbool.h>
 #include <math.h>
 #include <sys/time.h>
@@ -13,28 +14,44 @@ const int SCREEN_WIDTH = 1250;
 const int SCREEN_HEIGHT = 600;
 const int FPS = 60;
 
+
 struct player{
     Uint32 color;
     SDL_bool live;
     short point;
     short num_center;
     short centers[2][100];
+    short velocity;
+    bool can_attack_to;
+    short produce_solders_timerate;
+    bool potioned;
 };
 struct area{
-    int x;
-    int y;
+    short x;
+    short y;
     short playerID;
     short solders;
+};
+
+struct potion{
+    bool active;
+    short ID;
+    short playerID;
+    short timer;
+    struct potion* next;
+    short x;
+    short y;
 };
 struct solder{
     bool live;
     double x;
     double y;
-    short player;
+    //short player;
 };
 struct attack{
     struct area* origin;
     struct area* Destination;
+    short  number_solders_should_attack;
     short number_solders_inattack;
     struct solder solder[150];
     struct attack* next;
@@ -42,7 +59,138 @@ struct attack{
     double signx;
     short timer;
     short flag;
+    short playerID;
 };
+
+//struct area* comp_area[50];
+//struct area* player_area[50];
+void random_potion(short num_area,struct area area[num_area],struct potion* potion){
+    while(potion->next!=NULL){
+        potion=potion->next;
+    }
+    struct potion* new_potion = (struct potion*)(malloc(sizeof(struct potion)));
+    time_t t1;
+    srand ( (unsigned) time (&t1));
+    short first = rand() % num_area;
+    short second= rand() % num_area;
+    while(first == second){
+        second=rand() % num_area;
+    }
+    new_potion->x=(area[first].x + area[second].x)/2;
+    new_potion->y=(area[first].y+area[second].y)/2;
+    new_potion->timer=2000;
+    new_potion->active=false;
+    new_potion->ID=rand()%4;
+    new_potion->next=NULL;
+    potion->next=new_potion;
+    //double distance=sqrt((area[first].x - area[second].x) * (area[first].x - area[second].x) + (area[first].y - area[second].y)*(area[first].y  - area[second].y));
+}
+void delete_potion(struct potion* head){
+    if(head->next->next==NULL){
+        head->next=NULL;
+    }else{
+        struct potion* temp=head->next;
+        head->next=head->next->next;
+        free(temp);
+    }
+}
+void deactivate_potion(struct potion* potion_head,struct player player[],struct area area[],short num_player,short area_num){
+    while(potion_head->next !=NULL) {
+        struct potion *temp = potion_head;
+        potion_head = potion_head->next;
+        if(potion_head->active==true)
+            potion_head->timer--;
+        if ( potion_head->timer == 0 && potion_head->active == true){
+            printf("\ntimout\n");
+            switch (potion_head->ID) {
+                //players potions
+                //first potion
+                case 1:
+                    player[potion_head->playerID].velocity = 2;
+                    break;
+                    //second potion
+                case 2:
+                    for(int i=0;i<num_player;i++){
+                        if(i != potion_head->playerID){
+                            player[i].velocity=2;
+                        }
+                    }
+                    break;
+                    //barracks potions
+                    //decreasing time rate of produce=ing solder
+                case 3:
+                    player[potion_head->playerID].produce_solders_timerate=100;
+                    break;
+                case 0:
+                    player[potion_head->playerID].can_attack_to = true;
+                    break;
+            }
+            player[potion_head->playerID].potioned=false;
+            delete_potion(temp);
+        }
+    }
+}
+void activate_potion(struct player player[],struct area area[],struct potion* potion,short num_player,short player_ID,short area_num){
+    potion->active=true;
+    switch(potion->ID){
+        //players potions
+        //first potion: *1.5 player velocity_Purple
+        case 1:
+            printf("*1.5 velocity");
+            player[player_ID].velocity=4;
+            break;
+            //second potion: /2 op velocity_red
+        case 2:
+            printf("dec velocity");
+            for(int i=0;i<num_player;i++){
+                if(i != player_ID){
+                    player[i].velocity=1;
+                }
+            }
+            break;
+            //barracks potions
+            //decreasing time rate of producing solder _pink
+        case 3:
+            printf("time rate");
+            player[player_ID].produce_solders_timerate=200;
+            break;
+        case 0:
+            //enemies can not attack_green
+            printf("can attack ");
+            player[player_ID].can_attack_to = false;
+
+
+            break;
+    }
+
+}
+void active_check(struct potion* potion_head,struct attack* head, short  num_player, short  num_area, struct player player[], struct area area[]){
+    while(head->next != NULL) {
+        head = head->next;
+        if (player[head->playerID].potioned == false) {
+            while (potion_head->next != NULL) {
+                potion_head = potion_head->next;
+                if(potion_head->active==false){
+                    for (short i = 0; i < head->number_solders_inattack; i++) {
+                        if (abs(head->solder[i].x - potion_head->x) <= 10 &&
+                            abs(head->solder[i].y - potion_head->y) <= 10) {
+                            potion_head->playerID = head->playerID;
+                            player[head->playerID].potioned = true;
+                            activate_potion(player, area, potion_head, num_player, head->playerID, num_area);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+void draw_potion(SDL_Renderer *sdlRenderer,struct potion* head,Uint32 color[4]){
+    while(head->next!=NULL){
+        head=head->next;
+        if(head->active==false)
+            filledTrigonColor(sdlRenderer, (Sint16)(5+head->x), (Sint16)(head->y-5), (Sint16)(head->x), (Sint16)(head->y+5), (Sint16)(head->x-5),  (Sint16)(head->y-5), color[head->ID]);
+    }
+}
 void produce_solder(struct attack* head){
     if(head-> origin->solders >= 0 ){
         head->solder[head->number_solders_inattack].x=head->origin->x;
@@ -61,22 +209,49 @@ void delete(struct attack* head){
         free(temp);
     }
 }
+void crash( struct attack* head){
+/*    int hamle=0;
+    printf("\n");
+    hamle++;
+    printf("%d",hamle);*/
+    for(struct attack* temp=head->next; temp!=NULL; temp=temp->next){
+        //ehtemal???
+        if(head->playerID!= temp->playerID){
+            for(short i=0;i < head->number_solders_inattack;i++){
+                for(short j=0; j < temp->number_solders_inattack;j++){
+                    if(head->solder[i].live==true&&temp->solder[j].live==true&&(head->solder[i].x - temp -> solder[j].x)*(head->solder[i].x - temp -> solder[j].x)+ (head->solder[i].y - temp -> solder[j].y )*(head->solder[i].y - temp -> solder[j].y )<30 ){
+                        head->solder[i].live=false;
+                        temp->solder[j].live=false;
+                    }
+                }
+            }
+        }
+    }
+}
+void attack(struct attack* head,struct player player[]){
 
-void attack(struct attack* head){
     while(head->next != NULL) {
         struct attack* temp=head;
         head=head->next;
         head->timer--;
+        if(head->timer==0 && head->number_solders_inattack != head->number_solders_should_attack){
+            produce_solder(head);
+            head->timer=10;
+        }
         for (int i = 0; i < head->number_solders_inattack; i++) {
+            //check for crash
+            crash(head);
+            //printf(" %d  ",player[head->origin->playerID].velocity);
+            head->solder[i].x += head->signx * player[head->origin->playerID].velocity;
+            head->solder[i].y += head->shib* player[head->origin->playerID].velocity;
+
             if (head->solder[i].live == true) {
-                head->solder[i].x += head->signx;
-                head->solder[i].y += head->shib;
                 if (abs((int) head->solder[i].x - head->Destination->x) < 6 &&
                     abs((int) head->solder[i].y - head->Destination->y) < 6) {
                     head->solder[i].live = false;
                     if (head->Destination->solders >= 0 && head->Destination->playerID != head->origin->playerID) {
                         if (head->Destination->solders == 0) {
-                            head->Destination->playerID = head->solder->player;
+                            head->Destination->playerID = head->playerID;
                             head->Destination->solders++;
                         }
                         else{
@@ -89,16 +264,18 @@ void attack(struct attack* head){
                 }
             }
         }
-        if (head->flag == 0 && head->solder[head->number_solders_inattack-1].live == false) {
+        for(int k=0;k<head->number_solders_inattack;k++){
+            head->flag=0;
+            if(head->solder[k].live==true){
+                head->flag=1;
+                break;
+            }
+        }
+        if (head->flag == 0) {
             delete(temp);
         }
-        if(head->timer==0 && head->origin->solders != 0 && head->flag){
-            produce_solder(head);
-            head->timer=10;
-        }
-        if(head->origin->solders == 0 ){
-            head->flag=0;
-        }
+
+
     }
 }
 void add_at_tail(struct attack* head, struct area* source, struct area* destination){
@@ -108,25 +285,27 @@ void add_at_tail(struct attack* head, struct area* source, struct area* destinat
     struct attack* attack = (struct attack*)(malloc(sizeof(struct attack)));
     attack-> origin= source;
     attack->Destination=destination;
-    attack->number_solders_inattack=0;
-    attack->solder->player=source->playerID;
+    attack->number_solders_inattack=0;attack;
+    //printf("%d",source->solders);
+    attack->number_solders_should_attack= source->solders;
     double distance= sqrt((destination->y-source->y)*(destination->y-source->y)+(destination->x-source->x)*(destination->x-source->x));
 
-    //velocity=1 pixcel /s
-    attack->shib=1.0*(destination->y-source->y)/distance;
-    attack->signx=1.0*(destination->x-source->x)/distance;
-
+    //velocity=2 pixcel /s
+    attack->shib=(destination->y-source->y)/distance;
+    attack->signx=(destination->x-source->x)/distance;
+    attack->playerID=source->playerID;
     attack->timer=10;
     attack->flag=1;
     head->next=attack;
     attack->next = NULL;
 }
+
 void draw_attack(struct attack* head,SDL_Renderer *sdlRenderer,Uint32 color[]){
     while(head -> next != NULL){
         head=head->next;
         for(short i=0;i<head->number_solders_inattack;i++) {
             if (head->solder[i].live == true) {
-                filledCircleColor(sdlRenderer, (Sint16)head->solder[i].x, (Sint16)head->solder[i].y, 5, color[head->solder->player]);
+                filledCircleColor(sdlRenderer, (Sint16)head->solder[i].x, (Sint16)head->solder[i].y, 5, color[head->playerID]);
             }
         }
     }
@@ -186,8 +365,8 @@ void centers_of_hexagonals(int numarea, struct area area[numarea], Sint16 x, Sin
             if(i%z==0){
                 area[i].playerID=produced_player;
                 area[i].solders=10;
-                player[produced_player].centers[0][1]=x;
-                player[produced_player].centers[1][1]=y;
+                player[produced_player].centers[0][produced_player]=x;
+                player[produced_player].centers[1][produced_player]=y;
                 player[produced_player].num_center++;
                 produced_player++;
             }else{
@@ -280,7 +459,7 @@ int main() {
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     Uint32 colors[10]={0x7514A0EB,0x753C4CE7,0x75B6C673,0x6593570D,0x65AAE082 ,0x656B6A61,0x65BD69A5,0x65BD69A5};
     Uint32 colorfull[10]={0xff14A0EB,0xff3C4CE7,0xffB6C673,0xff93570D,0xffAAE082 ,0xff6B6A61,0xffBD69A5,0xffBD69A5};
-
+    Uint32 potion_colors[4]={0xff3FF45B,0xffF43FAD,0xff0303FC,0xffF403FC};
     Sint16 x = (Sint16)(SCREEN_WIDTH/2), y = (Sint16)(SCREEN_HEIGHT/2);
     // initialize centers of hexagons
     short num_player = 3, num_area=90;
@@ -293,19 +472,28 @@ int main() {
         player[i].live=SDL_TRUE;
         player[i].point=0;
         player[i].num_center=0;
+        player[i].velocity=2;
+        player[i].can_attack_to=true;
+        player[i].produce_solders_timerate=100;
+        player[i].potioned=false;
     }
+    //the last player is always neutral
     player[num_player].color=0x45F4F3F0;
     player[num_player].live=SDL_TRUE;
     player[num_player].point=0;
-
-    int arr=4;
-    short timer=0;
+    player[num_player].can_attack_to=true;
+    player[num_player].velocity=0;
     struct timeval te;
     SDL_bool first_click=SDL_FALSE;
+
+    short timer=0;
 
     struct attack* head=(struct attack*)(malloc(sizeof(struct attack)));
     head ->next=NULL;
     short origin;
+
+    struct potion* potion_head= malloc(sizeof(struct potion));
+    potion_head->next=NULL;
 
     while (shallExit==SDL_FALSE) {
 
@@ -314,23 +502,26 @@ int main() {
 
         //check for attacks
         if(head ->next != NULL){
-            //gettimeofday(&te, NULL);
-            //long long milliseconds = te.tv_sec*1000LL + te.tv_usec/1000;
-            attack(head);
+            attack(head,player);
         }
 
-        //check for crash
-        //if(head ->next != NULL){
-        //    crash(head);
-        //}
-        //void crash( struct attack* head){
-        //    while(head->next!=NULL){
-        //        head=head->next;
-        //        for(struct attack* temp; temp!=NULL; temp=temp->next){
-        //            if(head->solder->x==te)
-        //        }
-        //    }
-        //}
+        //check for time to create a potion
+        gettimeofday(&te, NULL);
+        long long milliseconds = te.tv_sec*1000LL + te.tv_usec/1000;
+        if(milliseconds % 1000==0){
+            printf("hi ");
+            //create coordinate & kind of potions randomly
+            random_potion(num_area,area,potion_head);
+        }
+
+        if(potion_head->next != NULL) {
+            //check for potions activate
+            if (head->next != NULL) {
+                active_check(potion_head, head, num_player, num_area, player, area);
+            }
+            //check deactivations
+            deactivate_potion(potion_head,player,area,num_player,num_area);
+        }
 
         // draw area and barracks
         for(int i=0;i<num_area;i++) {
@@ -340,22 +531,26 @@ int main() {
 
         //draw number of barracks solders
         timer++;
-        if(timer==100)
-            timer=0;
         for(int i=0;i<num_area;i++){
-            if(timer==0 &&area[i].playerID != num_player&&area[i].solders<99){
+            if(timer%player[area[i].playerID].produce_solders_timerate==0 &&area[i].playerID != num_player&&area[i].solders<99){
                 area[i].solders++;
             }
             char buffer[50];
             sprintf(buffer,"%d",area[i].solders);
             stringRGBA(sdlRenderer, area[i].x-4, area[i].y-3,buffer,0,0,0,255);
         }
+        if(timer==200)
+            timer=0;
 
         //draw attacks
         if(head -> next != NULL){
             draw_attack(head,sdlRenderer,colorfull);
         }
 
+        //draw potions
+        if(potion_head->next != NULL){
+            draw_potion(sdlRenderer,potion_head,potion_colors);
+        }
         // listen for key events
         SDL_Event sdlEvent;
         while (SDL_PollEvent(&sdlEvent)) {
@@ -368,13 +563,12 @@ int main() {
                     for(short i=0;i<num_area;i++){
                         if ((sdlEvent.button.x - area[i].x) * (sdlEvent.button.x - area[i].x) +
                             (sdlEvent.button.y - area[i].y) * (sdlEvent.button.y - area[i].y) <= 150) {
-                            if (first_click) {
+                            if (first_click && origin != i && player[area[i].playerID].can_attack_to) {
                                 //an attack is on
                                 first_click = SDL_FALSE;
-                                printf("ATACK");
                                 add_at_tail(head, &area[origin], &area[i]);
-                            } else {
-                                if (area[i].playerID != num_player) {
+                            } else if(first_click==SDL_FALSE) {
+                                if ( area[i].playerID != num_player) {
                                     first_click = SDL_TRUE;
                                     origin = i;
                                 }
@@ -390,6 +584,8 @@ int main() {
 
     }
     free(head);
+    free(potion_head);
+
     SDL_DestroyWindow(sdlWindow);
     SDL_Quit();
     return 0;
