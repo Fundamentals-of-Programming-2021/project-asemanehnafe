@@ -80,7 +80,31 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="D:/project1400/project-asemanehnafe/src/attack.c">
+			<Option target="state_io"/>
+		</Unit>
+		<Unit filename="D:/project1400/project-asemanehnafe/src/attack.h">
+			<Option target="state_io"/>
+		</Unit>
 		<Unit filename="D:/project1400/project-asemanehnafe/src/main.c">
+			<Option target="state_io"/>
+		</Unit>
+		<Unit filename="D:/project1400/project-asemanehnafe/src/map.c">
+			<Option target="state_io"/>
+		</Unit>
+		<Unit filename="D:/project1400/project-asemanehnafe/src/map.h">
+			<Option target="state_io"/>
+		</Unit>
+		<Unit filename="D:/project1400/project-asemanehnafe/src/potions.c">
+			<Option target="state_io"/>
+		</Unit>
+		<Unit filename="D:/project1400/project-asemanehnafe/src/potions.h">
+			<Option target="state_io"/>
+		</Unit>
+		<Unit filename="D:/project1400/project-asemanehnafe/src/scores.c">
+			<Option target="state_io"/>
+		</Unit>
+		<Unit filename="D:/project1400/project-asemanehnafe/src/scores.h">
 			<Option target="state_io"/>
 		</Unit>
 		<Unit filename="D:/project1400/project-asemanehnafe/CMakeLists.txt">

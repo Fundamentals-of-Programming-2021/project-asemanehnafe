@@ -128,6 +128,30 @@ state_io/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\state_io.dir\build.make CMakeFiles/state_io.dir/build
 .PHONY : state_io/fast
 
+src/attack.obj: src/attack.c.obj
+.PHONY : src/attack.obj
+
+# target to build an object file
+src/attack.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\state_io.dir\build.make CMakeFiles/state_io.dir/src/attack.c.obj
+.PHONY : src/attack.c.obj
+
+src/attack.i: src/attack.c.i
+.PHONY : src/attack.i
+
+# target to preprocess a source file
+src/attack.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\state_io.dir\build.make CMakeFiles/state_io.dir/src/attack.c.i
+.PHONY : src/attack.c.i
+
+src/attack.s: src/attack.c.s
+.PHONY : src/attack.s
+
+# target to generate assembly for a file
+src/attack.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\state_io.dir\build.make CMakeFiles/state_io.dir/src/attack.c.s
+.PHONY : src/attack.c.s
+
 src/main.obj: src/main.c.obj
 .PHONY : src/main.obj
 
@@ -152,6 +176,78 @@ src/main.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\state_io.dir\build.make CMakeFiles/state_io.dir/src/main.c.s
 .PHONY : src/main.c.s
 
+src/map.obj: src/map.c.obj
+.PHONY : src/map.obj
+
+# target to build an object file
+src/map.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\state_io.dir\build.make CMakeFiles/state_io.dir/src/map.c.obj
+.PHONY : src/map.c.obj
+
+src/map.i: src/map.c.i
+.PHONY : src/map.i
+
+# target to preprocess a source file
+src/map.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\state_io.dir\build.make CMakeFiles/state_io.dir/src/map.c.i
+.PHONY : src/map.c.i
+
+src/map.s: src/map.c.s
+.PHONY : src/map.s
+
+# target to generate assembly for a file
+src/map.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\state_io.dir\build.make CMakeFiles/state_io.dir/src/map.c.s
+.PHONY : src/map.c.s
+
+src/potions.obj: src/potions.c.obj
+.PHONY : src/potions.obj
+
+# target to build an object file
+src/potions.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\state_io.dir\build.make CMakeFiles/state_io.dir/src/potions.c.obj
+.PHONY : src/potions.c.obj
+
+src/potions.i: src/potions.c.i
+.PHONY : src/potions.i
+
+# target to preprocess a source file
+src/potions.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\state_io.dir\build.make CMakeFiles/state_io.dir/src/potions.c.i
+.PHONY : src/potions.c.i
+
+src/potions.s: src/potions.c.s
+.PHONY : src/potions.s
+
+# target to generate assembly for a file
+src/potions.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\state_io.dir\build.make CMakeFiles/state_io.dir/src/potions.c.s
+.PHONY : src/potions.c.s
+
+src/scores.obj: src/scores.c.obj
+.PHONY : src/scores.obj
+
+# target to build an object file
+src/scores.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\state_io.dir\build.make CMakeFiles/state_io.dir/src/scores.c.obj
+.PHONY : src/scores.c.obj
+
+src/scores.i: src/scores.c.i
+.PHONY : src/scores.i
+
+# target to preprocess a source file
+src/scores.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\state_io.dir\build.make CMakeFiles/state_io.dir/src/scores.c.i
+.PHONY : src/scores.c.i
+
+src/scores.s: src/scores.c.s
+.PHONY : src/scores.s
+
+# target to generate assembly for a file
+src/scores.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\state_io.dir\build.make CMakeFiles/state_io.dir/src/scores.c.s
+.PHONY : src/scores.c.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -161,9 +257,21 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... state_io
+	@echo ... src/attack.obj
+	@echo ... src/attack.i
+	@echo ... src/attack.s
 	@echo ... src/main.obj
 	@echo ... src/main.i
 	@echo ... src/main.s
+	@echo ... src/map.obj
+	@echo ... src/map.i
+	@echo ... src/map.s
+	@echo ... src/potions.obj
+	@echo ... src/potions.i
+	@echo ... src/potions.s
+	@echo ... src/scores.obj
+	@echo ... src/scores.i
+	@echo ... src/scores.s
 .PHONY : help
 
 

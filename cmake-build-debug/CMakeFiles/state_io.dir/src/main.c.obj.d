@@ -173,4 +173,7 @@ CMakeFiles/state_io.dir/src/main.c.obj: \
  D:/programs/CLion\ 2021.3.1/bin/mingw/x86_64-w64-mingw32/include/_timeval.h \
  D:/programs/CLion\ 2021.3.1/bin/mingw/x86_64-w64-mingw32/include/sys/timeb.h \
  D:/programs/CLion\ 2021.3.1/bin/mingw/x86_64-w64-mingw32/include/sec_api/sys/timeb_s.h \
- D:/programs/CLion\ 2021.3.1/bin/mingw/x86_64-w64-mingw32/include/pthread_time.h
+ D:/programs/CLion\ 2021.3.1/bin/mingw/x86_64-w64-mingw32/include/pthread_time.h \
+ D:/programs/CLion\ 2021.3.1/bin/mingw/x86_64-w64-mingw32/include/string.h \
+ D:/programs/CLion\ 2021.3.1/bin/mingw/x86_64-w64-mingw32/include/sec_api/string_s.h \
+ D:\project1400\project-asemanehnafe\src\map.h

@@ -68,11 +68,26 @@ include CMakeFiles/state_io.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/state_io.dir/flags.make
 
+CMakeFiles/state_io.dir/src/attack.c.obj: CMakeFiles/state_io.dir/flags.make
+CMakeFiles/state_io.dir/src/attack.c.obj: CMakeFiles/state_io.dir/includes_C.rsp
+CMakeFiles/state_io.dir/src/attack.c.obj: ../src/attack.c
+CMakeFiles/state_io.dir/src/attack.c.obj: CMakeFiles/state_io.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\project1400\project-asemanehnafe\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/state_io.dir/src/attack.c.obj"
+	"D:\programs\CLion 2021.3.1\bin\mingw\bin\gcc.exe" $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/state_io.dir/src/attack.c.obj -MF CMakeFiles\state_io.dir\src\attack.c.obj.d -o CMakeFiles\state_io.dir\src\attack.c.obj -c D:\project1400\project-asemanehnafe\src\attack.c
+
+CMakeFiles/state_io.dir/src/attack.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/state_io.dir/src/attack.c.i"
+	"D:\programs\CLion 2021.3.1\bin\mingw\bin\gcc.exe" $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E D:\project1400\project-asemanehnafe\src\attack.c > CMakeFiles\state_io.dir\src\attack.c.i
+
+CMakeFiles/state_io.dir/src/attack.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/state_io.dir/src/attack.c.s"
+	"D:\programs\CLion 2021.3.1\bin\mingw\bin\gcc.exe" $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:\project1400\project-asemanehnafe\src\attack.c -o CMakeFiles\state_io.dir\src\attack.c.s
+
 CMakeFiles/state_io.dir/src/main.c.obj: CMakeFiles/state_io.dir/flags.make
 CMakeFiles/state_io.dir/src/main.c.obj: CMakeFiles/state_io.dir/includes_C.rsp
 CMakeFiles/state_io.dir/src/main.c.obj: ../src/main.c
 CMakeFiles/state_io.dir/src/main.c.obj: CMakeFiles/state_io.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\project1400\project-asemanehnafe\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/state_io.dir/src/main.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\project1400\project-asemanehnafe\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/state_io.dir/src/main.c.obj"
 	"D:\programs\CLion 2021.3.1\bin\mingw\bin\gcc.exe" $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/state_io.dir/src/main.c.obj -MF CMakeFiles\state_io.dir\src\main.c.obj.d -o CMakeFiles\state_io.dir\src\main.c.obj -c D:\project1400\project-asemanehnafe\src\main.c
 
 CMakeFiles/state_io.dir/src/main.c.i: cmake_force
@@ -83,14 +98,67 @@ CMakeFiles/state_io.dir/src/main.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/state_io.dir/src/main.c.s"
 	"D:\programs\CLion 2021.3.1\bin\mingw\bin\gcc.exe" $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:\project1400\project-asemanehnafe\src\main.c -o CMakeFiles\state_io.dir\src\main.c.s
 
+CMakeFiles/state_io.dir/src/map.c.obj: CMakeFiles/state_io.dir/flags.make
+CMakeFiles/state_io.dir/src/map.c.obj: CMakeFiles/state_io.dir/includes_C.rsp
+CMakeFiles/state_io.dir/src/map.c.obj: ../src/map.c
+CMakeFiles/state_io.dir/src/map.c.obj: CMakeFiles/state_io.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\project1400\project-asemanehnafe\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/state_io.dir/src/map.c.obj"
+	"D:\programs\CLion 2021.3.1\bin\mingw\bin\gcc.exe" $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/state_io.dir/src/map.c.obj -MF CMakeFiles\state_io.dir\src\map.c.obj.d -o CMakeFiles\state_io.dir\src\map.c.obj -c D:\project1400\project-asemanehnafe\src\map.c
+
+CMakeFiles/state_io.dir/src/map.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/state_io.dir/src/map.c.i"
+	"D:\programs\CLion 2021.3.1\bin\mingw\bin\gcc.exe" $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E D:\project1400\project-asemanehnafe\src\map.c > CMakeFiles\state_io.dir\src\map.c.i
+
+CMakeFiles/state_io.dir/src/map.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/state_io.dir/src/map.c.s"
+	"D:\programs\CLion 2021.3.1\bin\mingw\bin\gcc.exe" $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:\project1400\project-asemanehnafe\src\map.c -o CMakeFiles\state_io.dir\src\map.c.s
+
+CMakeFiles/state_io.dir/src/potions.c.obj: CMakeFiles/state_io.dir/flags.make
+CMakeFiles/state_io.dir/src/potions.c.obj: CMakeFiles/state_io.dir/includes_C.rsp
+CMakeFiles/state_io.dir/src/potions.c.obj: ../src/potions.c
+CMakeFiles/state_io.dir/src/potions.c.obj: CMakeFiles/state_io.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\project1400\project-asemanehnafe\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/state_io.dir/src/potions.c.obj"
+	"D:\programs\CLion 2021.3.1\bin\mingw\bin\gcc.exe" $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/state_io.dir/src/potions.c.obj -MF CMakeFiles\state_io.dir\src\potions.c.obj.d -o CMakeFiles\state_io.dir\src\potions.c.obj -c D:\project1400\project-asemanehnafe\src\potions.c
+
+CMakeFiles/state_io.dir/src/potions.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/state_io.dir/src/potions.c.i"
+	"D:\programs\CLion 2021.3.1\bin\mingw\bin\gcc.exe" $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E D:\project1400\project-asemanehnafe\src\potions.c > CMakeFiles\state_io.dir\src\potions.c.i
+
+CMakeFiles/state_io.dir/src/potions.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/state_io.dir/src/potions.c.s"
+	"D:\programs\CLion 2021.3.1\bin\mingw\bin\gcc.exe" $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:\project1400\project-asemanehnafe\src\potions.c -o CMakeFiles\state_io.dir\src\potions.c.s
+
+CMakeFiles/state_io.dir/src/scores.c.obj: CMakeFiles/state_io.dir/flags.make
+CMakeFiles/state_io.dir/src/scores.c.obj: CMakeFiles/state_io.dir/includes_C.rsp
+CMakeFiles/state_io.dir/src/scores.c.obj: ../src/scores.c
+CMakeFiles/state_io.dir/src/scores.c.obj: CMakeFiles/state_io.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\project1400\project-asemanehnafe\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/state_io.dir/src/scores.c.obj"
+	"D:\programs\CLion 2021.3.1\bin\mingw\bin\gcc.exe" $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/state_io.dir/src/scores.c.obj -MF CMakeFiles\state_io.dir\src\scores.c.obj.d -o CMakeFiles\state_io.dir\src\scores.c.obj -c D:\project1400\project-asemanehnafe\src\scores.c
+
+CMakeFiles/state_io.dir/src/scores.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/state_io.dir/src/scores.c.i"
+	"D:\programs\CLion 2021.3.1\bin\mingw\bin\gcc.exe" $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E D:\project1400\project-asemanehnafe\src\scores.c > CMakeFiles\state_io.dir\src\scores.c.i
+
+CMakeFiles/state_io.dir/src/scores.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/state_io.dir/src/scores.c.s"
+	"D:\programs\CLion 2021.3.1\bin\mingw\bin\gcc.exe" $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:\project1400\project-asemanehnafe\src\scores.c -o CMakeFiles\state_io.dir\src\scores.c.s
+
 # Object files for target state_io
 state_io_OBJECTS = \
-"CMakeFiles/state_io.dir/src/main.c.obj"
+"CMakeFiles/state_io.dir/src/attack.c.obj" \
+"CMakeFiles/state_io.dir/src/main.c.obj" \
+"CMakeFiles/state_io.dir/src/map.c.obj" \
+"CMakeFiles/state_io.dir/src/potions.c.obj" \
+"CMakeFiles/state_io.dir/src/scores.c.obj"
 
 # External object files for target state_io
 state_io_EXTERNAL_OBJECTS =
 
+state_io.exe: CMakeFiles/state_io.dir/src/attack.c.obj
 state_io.exe: CMakeFiles/state_io.dir/src/main.c.obj
+state_io.exe: CMakeFiles/state_io.dir/src/map.c.obj
+state_io.exe: CMakeFiles/state_io.dir/src/potions.c.obj
+state_io.exe: CMakeFiles/state_io.dir/src/scores.c.obj
 state_io.exe: CMakeFiles/state_io.dir/build.make
 state_io.exe: ../sdl2/sdl2-lib/libSDL2.a
 state_io.exe: ../sdl2/sdl2-lib/libSDL2main.a
@@ -98,7 +166,7 @@ state_io.exe: ../sdl2/sdl2-gfx-lib/libsdl-gfx.a
 state_io.exe: CMakeFiles/state_io.dir/linklibs.rsp
 state_io.exe: CMakeFiles/state_io.dir/objects1.rsp
 state_io.exe: CMakeFiles/state_io.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=D:\project1400\project-asemanehnafe\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking C executable state_io.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=D:\project1400\project-asemanehnafe\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking C executable state_io.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\state_io.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
