@@ -37,7 +37,7 @@ int end_of_GAME(struct area area[],short num_area,short num_player,struct player
 void play(SDL_Renderer *sdlRenderer){
     Uint32 colors[10]={0x7514A0EB,0x753C4CE7,0x75B6C673,0x6593570D,0x65AAE082 ,0x656B6A61,0x65BD69A5,0x65BD69A5};
     Uint32 colorfull[10]={0xff14A0EB,0xff3C4CE7,0xffB6C673,0xff93570D,0xffAAE082 ,0xff6B6A61,0xffBD69A5,0xffBD69A5};
-    Uint32 potion_colors[4]={0xff3FF45B,0xffF43FAD,0xff0303FC,0xffF403FC};
+    Uint32 potion_colors[8]={0xff3FF45B,0xffF43FAD,0xff0303FC,0xffF403FC,0xffFDF300,0xff03ECFC,0xffF97709,0xff06259B};
     Sint16 x = (Sint16)(SCREEN_WIDTH/3), y = (Sint16)(SCREEN_HEIGHT/2);
     // initialize centers of hexagons & players
     struct player player[num_player+1];
@@ -53,6 +53,8 @@ void play(SDL_Renderer *sdlRenderer){
         player[i].can_attack_to=true;
         player[i].produce_solders_timerate=100;
         player[i].potioned=false;
+        player[i].power=false;
+        player[i].bimax_solder=false;
     }
 
     //the last player is always neutral
@@ -62,6 +64,9 @@ void play(SDL_Renderer *sdlRenderer){
     player[num_player].velocity=0;
     player[num_player].produce_solders_timerate=100;
     player[num_player].num_center=0;
+    player[num_player].power=false;
+    player[num_player].bimax_solder=false;
+
 
     centers_of_hexagonals(num_area,area,x,y,num_player, player,map.seed);
 
@@ -128,11 +133,15 @@ void play(SDL_Renderer *sdlRenderer){
         stringRGBA(sdlRenderer,(Sint16)(SCREEN_WIDTH*3/4),SCREEN_HEIGHT-27*2,"PURPLE POTION:  YOR VELOCITY * 2",255,255,255, 0xff);
         stringRGBA(sdlRenderer,(Sint16)(SCREEN_WIDTH*3/4),SCREEN_HEIGHT-27*3,"PINK:PRODUCING SOLDERS TIME RATE/2",255,255,255, 0xff);
         stringRGBA(sdlRenderer,(Sint16)(SCREEN_WIDTH*3/4),SCREEN_HEIGHT-27*4,"RED POTION: OPPONENT SPEED /2",255,255,255, 0xff);
+        stringRGBA(sdlRenderer,(Sint16)(SCREEN_WIDTH*3/4),SCREEN_HEIGHT-27*5,"YELLOW POTION: YOU CAN'T MOVE",255,255,255, 0xff);
+        stringRGBA(sdlRenderer,(Sint16)(SCREEN_WIDTH*3/4),SCREEN_HEIGHT-27*6,"BLUE POTION :ALWAYS PRODUCE ",255,255,255, 0xff);
+        stringRGBA(sdlRenderer,(Sint16)(SCREEN_WIDTH*3/4),SCREEN_HEIGHT-27*7,"ORANGE POTION : INCREASE IN ATTACK",255,255,255, 0xff);
+        stringRGBA(sdlRenderer,(Sint16)(SCREEN_WIDTH*3/4),SCREEN_HEIGHT-27*8,"DARKBLUE POTION : YOUR POWER * 2",255,255,255, 0xff);
 
         //draw number of barracks solders
         timer++;
         for(int i=0;i<num_area;i++){
-            if((timer%(player[area[i].playerID].produce_solders_timerate))==0 &&area[i].playerID != num_player&&area[i].solders<99){
+            if((timer%(player[area[i].playerID].produce_solders_timerate))==0 &&area[i].playerID != num_player && (area[i].solders<99 || player[area[i].playerID].bimax_solder)){
                 area[i].solders++;
             }
             char buffer[50];
@@ -165,12 +174,12 @@ void play(SDL_Renderer *sdlRenderer){
                     for(short i=0;i<num_area;i++){
                         if ((sdlEvent.button.x - area[i].x) * (sdlEvent.button.x - area[i].x) +
                             (sdlEvent.button.y - area[i].y) * (sdlEvent.button.y - area[i].y) <= 150) {
-                            if (first_click && origin != i && player[area[i].playerID].can_attack_to) {
+                            if (first_click && origin != i && (player[area[i].playerID].can_attack_to || area[i].playerID == area[origin].playerID)) {
                                 //an attack is on
                                 first_click = SDL_FALSE;
                                 add_at_tail(head, &area[origin], &area[i]);
                             }else if(first_click==SDL_FALSE) {
-                                if ( area[i].playerID == 0) {
+                                if ( area[i].playerID != num_player) {
                                     first_click = SDL_TRUE;
                                     origin = i;
                                 }

@@ -11,12 +11,7 @@ struct area{
     bool attacker;
 };
 
-struct solder{
-    bool live;
-    double x;
-    double y;
-    //short player;
-};
+
 
 struct player{
     Uint32 color;
@@ -28,6 +23,9 @@ struct player{
     SDL_bool can_attack_to;
     short produce_solders_timerate;
     bool potioned;
+    bool move;
+    bool power;
+    bool bimax_solder;
 };
 
 void print();

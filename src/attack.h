@@ -12,6 +12,12 @@ struct attack{
     double signx;
     short timer;
     short playerID;
+
+};
+struct solder{
+    bool live;
+    double x;
+    double y;
 };
 void draw_attack(struct attack* head,SDL_Renderer *sdlRenderer,Uint32 color[]);
 void add_at_tail(struct attack* head, struct area* source, struct area* destination);

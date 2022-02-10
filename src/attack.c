@@ -38,10 +38,7 @@ void delete(struct attack* head){
     }
 }
 void crash( struct attack* head){
-/*    int hamle=0;
-    printf("\n");
-    hamle++;
-    printf("%d",hamle);*/
+
     for(struct attack* temp=head->next; temp!=NULL; temp=temp->next){
         if(head->playerID!= temp->playerID){
             for(short i=0;i < head->number_solders_inattack;i++){
@@ -73,8 +70,10 @@ void attack(struct attack* head,struct player player[]){
         crash(head);
         for (int i = 0; i < head->number_solders_inattack; i++) {
             //printf(" %d  ",player[head->origin->playerID].velocity);
-            head->solder[i].x += head->signx * player[head->origin->playerID].velocity;
-            head->solder[i].y += head->shib* player[head->origin->playerID].velocity;
+            if(player[head->playerID].move){
+                head->solder[i].x += head->signx * player[head->origin->playerID].velocity;
+                head->solder[i].y += head->shib* player[head->origin->playerID].velocity;
+            }
 
             if (head->solder[i].live == true) {
                 if (abs((int) head->solder[i].x - head->Destination->x) < 6 &&

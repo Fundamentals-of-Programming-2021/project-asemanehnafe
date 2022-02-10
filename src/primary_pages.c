@@ -266,6 +266,7 @@ void chose_map(SDL_Renderer *sdlRenderer){
                         sdlEvent.button.y <280 && sdlEvent.button.y >130) {
                         map.seed=78000;
                         map.area=19;
+                        num_player=3;
                         mapbool=SDL_TRUE;
                         SDL_DestroyTexture(sdlTexture_map);
                     }
@@ -273,6 +274,7 @@ void chose_map(SDL_Renderer *sdlRenderer){
                              sdlEvent.button.y < 500 && sdlEvent.button.y >355) {
                         map.seed=600;
                         map.area=20;
+                        num_player=3;
                         mapbool=SDL_TRUE;
                         SDL_DestroyTexture(sdlTexture_map);
                     }
@@ -280,6 +282,7 @@ void chose_map(SDL_Renderer *sdlRenderer){
                              sdlEvent.button.y <280 && sdlEvent.button.y >130) {
                         map.seed=400;
                         map.area=13;
+                        num_player=3;
                         mapbool=SDL_TRUE;
                         SDL_DestroyTexture(sdlTexture_map);
                     }
@@ -287,14 +290,16 @@ void chose_map(SDL_Renderer *sdlRenderer){
                              sdlEvent.button.y < 500 && sdlEvent.button.y >355) {
                         map.seed=10000;
                         map.area=16;
+                        num_player=3;
+                        //for memory check
+/*                        map.area=12;
+                        num_player=2;*/
                         mapbool=SDL_TRUE;
                         SDL_DestroyTexture(sdlTexture_map);
                     }
                     else if (sdlEvent.button.x < 749&& sdlEvent.button.x > 483&&
                              sdlEvent.button.y < 400 && sdlEvent.button.y >255) {
                         getrandom(sdlRenderer);
-
-
                         mapbool=SDL_TRUE;
                         SDL_DestroyTexture(sdlTexture_map);
                     }
