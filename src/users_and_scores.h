@@ -4,7 +4,7 @@
 
 #ifndef MAIN_C_USERS_AND_SCORES_H
 #define MAIN_C_USERS_AND_SCORES_H
-void check_user(char text[100],struct player player[]);
+int check_user(char text[100]);
 void sort_users(int *high_score,char rank[100]);
 void replace_Score(int new_point,char user[100]);
 

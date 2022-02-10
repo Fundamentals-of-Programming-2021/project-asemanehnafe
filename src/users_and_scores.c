@@ -15,11 +15,11 @@
 #include "potions.h"
 #include "users_and_scores.h"
 
-void check_user(char text[100],struct player player[]){
+int check_user(char text[100]){
     FILE* ptr = fopen("users.txt", "a+");
     if (ptr == NULL) {
         printf("no such file.");
-        return ;
+        return -1;
     }
     /* Assuming that user.txt has content
     in below format
@@ -36,16 +36,17 @@ void check_user(char text[100],struct player player[]){
     while (fscanf(ptr, "%[^\n]s",buf)== 1){
         fscanf(ptr," %d ", &last_point);
         if(strcmp(text,buf)==0){
-            player[0].point=last_point;
+            fclose(ptr);
+            return last_point;
             new=0;
         }
     }
     if(new){
-        player[0].point=0;
         fputs(text, ptr);
         fprintf(ptr,"\n%d\n",0);
     }
     fclose(ptr);
+    return 0;
 }
 void sort_users(int *high_score,char rank[100]){
     FILE *file = fopen("users.txt","r");

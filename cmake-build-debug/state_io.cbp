@@ -95,16 +95,28 @@
 		<Unit filename="D:/project1400/project-asemanehnafe/src/map.h">
 			<Option target="state_io"/>
 		</Unit>
+		<Unit filename="D:/project1400/project-asemanehnafe/src/play_page.c">
+			<Option target="state_io"/>
+		</Unit>
+		<Unit filename="D:/project1400/project-asemanehnafe/src/play_page.h">
+			<Option target="state_io"/>
+		</Unit>
 		<Unit filename="D:/project1400/project-asemanehnafe/src/potions.c">
 			<Option target="state_io"/>
 		</Unit>
 		<Unit filename="D:/project1400/project-asemanehnafe/src/potions.h">
 			<Option target="state_io"/>
 		</Unit>
-		<Unit filename="D:/project1400/project-asemanehnafe/src/scores.c">
+		<Unit filename="D:/project1400/project-asemanehnafe/src/primary_pages.c">
 			<Option target="state_io"/>
 		</Unit>
-		<Unit filename="D:/project1400/project-asemanehnafe/src/scores.h">
+		<Unit filename="D:/project1400/project-asemanehnafe/src/primary_pages.h">
+			<Option target="state_io"/>
+		</Unit>
+		<Unit filename="D:/project1400/project-asemanehnafe/src/users_and_scores.c">
+			<Option target="state_io"/>
+		</Unit>
+		<Unit filename="D:/project1400/project-asemanehnafe/src/users_and_scores.h">
 			<Option target="state_io"/>
 		</Unit>
 		<Unit filename="D:/project1400/project-asemanehnafe/CMakeLists.txt">

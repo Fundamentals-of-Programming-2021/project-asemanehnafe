@@ -6,7 +6,6 @@
 #include <stdbool.h>
 #include "map.h"
 
-
 void draw_hexagon(SDL_Renderer *sdlRenderer,Sint16 x,Sint16 y, Uint32 color){
     Sint16  dy = 25,dx =(Sint16)((sqrt(3.0))*dy);
     Sint16 Xvects[6]={(Sint16)(x-dx), x, (Sint16)(x+dx), (Sint16)(x+dx), x, (Sint16)(x-dx)};
@@ -33,7 +32,7 @@ void centers_of_hexagonals(int numarea, struct area area[numarea], Sint16 x, Sin
             flag = 0;
         }else {
             for (int j = 0; j < i; j++) {
-                if ((x + dir[a][0] == area[j].x && y + dir[a][1] == area[j].y ) ||
+                if ((abs(x + dir[a][0] - area[j].x )<22&& abs( y + dir[a][1] - area[j].y) <22) ||
                     x + dir[a][0] + dx > SCREEN_WIDTH*2/3 || x + dir[a][0] - dx < 0 || y + dir[a][1] - 2 * dy < 0 ||
                     y + dir[a][1] + 2 * dy > SCREEN_HEIGHT){
                     flag = 0;

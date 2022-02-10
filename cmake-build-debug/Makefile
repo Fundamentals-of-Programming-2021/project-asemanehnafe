@@ -200,6 +200,30 @@ src/map.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\state_io.dir\build.make CMakeFiles/state_io.dir/src/map.c.s
 .PHONY : src/map.c.s
 
+src/play_page.obj: src/play_page.c.obj
+.PHONY : src/play_page.obj
+
+# target to build an object file
+src/play_page.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\state_io.dir\build.make CMakeFiles/state_io.dir/src/play_page.c.obj
+.PHONY : src/play_page.c.obj
+
+src/play_page.i: src/play_page.c.i
+.PHONY : src/play_page.i
+
+# target to preprocess a source file
+src/play_page.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\state_io.dir\build.make CMakeFiles/state_io.dir/src/play_page.c.i
+.PHONY : src/play_page.c.i
+
+src/play_page.s: src/play_page.c.s
+.PHONY : src/play_page.s
+
+# target to generate assembly for a file
+src/play_page.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\state_io.dir\build.make CMakeFiles/state_io.dir/src/play_page.c.s
+.PHONY : src/play_page.c.s
+
 src/potions.obj: src/potions.c.obj
 .PHONY : src/potions.obj
 
@@ -224,29 +248,53 @@ src/potions.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\state_io.dir\build.make CMakeFiles/state_io.dir/src/potions.c.s
 .PHONY : src/potions.c.s
 
-src/scores.obj: src/scores.c.obj
-.PHONY : src/scores.obj
+src/primary_pages.obj: src/primary_pages.c.obj
+.PHONY : src/primary_pages.obj
 
 # target to build an object file
-src/scores.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\state_io.dir\build.make CMakeFiles/state_io.dir/src/scores.c.obj
-.PHONY : src/scores.c.obj
+src/primary_pages.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\state_io.dir\build.make CMakeFiles/state_io.dir/src/primary_pages.c.obj
+.PHONY : src/primary_pages.c.obj
 
-src/scores.i: src/scores.c.i
-.PHONY : src/scores.i
+src/primary_pages.i: src/primary_pages.c.i
+.PHONY : src/primary_pages.i
 
 # target to preprocess a source file
-src/scores.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\state_io.dir\build.make CMakeFiles/state_io.dir/src/scores.c.i
-.PHONY : src/scores.c.i
+src/primary_pages.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\state_io.dir\build.make CMakeFiles/state_io.dir/src/primary_pages.c.i
+.PHONY : src/primary_pages.c.i
 
-src/scores.s: src/scores.c.s
-.PHONY : src/scores.s
+src/primary_pages.s: src/primary_pages.c.s
+.PHONY : src/primary_pages.s
 
 # target to generate assembly for a file
-src/scores.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\state_io.dir\build.make CMakeFiles/state_io.dir/src/scores.c.s
-.PHONY : src/scores.c.s
+src/primary_pages.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\state_io.dir\build.make CMakeFiles/state_io.dir/src/primary_pages.c.s
+.PHONY : src/primary_pages.c.s
+
+src/users_and_scores.obj: src/users_and_scores.c.obj
+.PHONY : src/users_and_scores.obj
+
+# target to build an object file
+src/users_and_scores.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\state_io.dir\build.make CMakeFiles/state_io.dir/src/users_and_scores.c.obj
+.PHONY : src/users_and_scores.c.obj
+
+src/users_and_scores.i: src/users_and_scores.c.i
+.PHONY : src/users_and_scores.i
+
+# target to preprocess a source file
+src/users_and_scores.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\state_io.dir\build.make CMakeFiles/state_io.dir/src/users_and_scores.c.i
+.PHONY : src/users_and_scores.c.i
+
+src/users_and_scores.s: src/users_and_scores.c.s
+.PHONY : src/users_and_scores.s
+
+# target to generate assembly for a file
+src/users_and_scores.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\state_io.dir\build.make CMakeFiles/state_io.dir/src/users_and_scores.c.s
+.PHONY : src/users_and_scores.c.s
 
 # Help Target
 help:
@@ -266,12 +314,18 @@ help:
 	@echo ... src/map.obj
 	@echo ... src/map.i
 	@echo ... src/map.s
+	@echo ... src/play_page.obj
+	@echo ... src/play_page.i
+	@echo ... src/play_page.s
 	@echo ... src/potions.obj
 	@echo ... src/potions.i
 	@echo ... src/potions.s
-	@echo ... src/scores.obj
-	@echo ... src/scores.i
-	@echo ... src/scores.s
+	@echo ... src/primary_pages.obj
+	@echo ... src/primary_pages.i
+	@echo ... src/primary_pages.s
+	@echo ... src/users_and_scores.obj
+	@echo ... src/users_and_scores.i
+	@echo ... src/users_and_scores.s
 .PHONY : help
 
 

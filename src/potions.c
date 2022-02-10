@@ -33,6 +33,7 @@ void random_potion(short num_area,struct area area[num_area],struct potion* poti
 }
 void delete_potion(struct potion* head){
     if(head->next->next==NULL){
+        free(head->next);
         head->next=NULL;
     }else{
         struct potion* temp=head->next;
@@ -47,31 +48,31 @@ void deactivate_potion(struct potion* potion_head,struct player player[],struct 
         if(potion_head->active==true)
             potion_head->timer--;
         if ( potion_head->timer == 0 && potion_head->active == true){
-            printf("\ntimout\n");
             switch (potion_head->ID) {
                 //players potions
                 //first potion
                 case 1:
-                    player[potion_head->playerID].velocity = 2;
+                    player[potion_head->playerID].velocity /=2;
                     break;
                     //second potion
                 case 2:
                     for(int i=0;i<num_player;i++){
                         if(i != potion_head->playerID){
-                            player[i].velocity=2;
+                            player[i].velocity *=2;
                         }
                     }
                     break;
                     //barracks potions
                     //decreasing time rate of produce=ing solder
                 case 3:
-                    player[potion_head->playerID].produce_solders_timerate=100;
+                    player[potion_head->playerID].produce_solders_timerate/=2;
                     break;
                 case 0:
                     player[potion_head->playerID].can_attack_to = true;
                     break;
             }
             player[potion_head->playerID].potioned=false;
+            potion_head=temp;
             delete_potion(temp);
         }
     }
@@ -82,29 +83,24 @@ void activate_potion(struct player player[],struct area area[],struct potion* po
         //players potions
         //first potion: *1.5 player velocity_Purple
         case 1:
-            printf("*1.5 velocity");
-            player[player_ID].velocity=4;
+            player[player_ID].velocity*=2;
             break;
             //second potion: /2 op velocity_red
         case 2:
-            printf("dec velocity");
             for(int i=0;i<num_player;i++){
                 if(i != player_ID){
-                    player[i].velocity=1;
+                    player[i].velocity/=2;
                 }
             }
             break;
             //barracks potions
             //decreasing time rate of producing solder _pink
         case 3:
-            printf("time rate");
-            player[player_ID].produce_solders_timerate=200;
+            player[player_ID].produce_solders_timerate*=2;
             break;
         case 0:
             //enemies can not attack_green
-            printf("can attack ");
             player[player_ID].can_attack_to = false;
-
 
             break;
     }
@@ -114,6 +110,7 @@ void active_check(struct potion* potion_head,struct attack* head, short  num_pla
     while(head->next != NULL) {
         head = head->next;
         if (player[head->playerID].potioned == false) {
+            struct potion* potion_temp=potion_head;
             while (potion_head->next != NULL) {
                 potion_head = potion_head->next;
                 if(potion_head->active==false){
@@ -127,6 +124,7 @@ void active_check(struct potion* potion_head,struct attack* head, short  num_pla
                     }
                 }
             }
+            potion_head = potion_temp;
         }
     }
 }
