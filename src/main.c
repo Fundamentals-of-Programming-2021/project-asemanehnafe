@@ -1,14 +1,16 @@
 #include <SDL.h>
-#include <SDL2_gfxPrimitives.h>
 #ifdef main
 #undef main
 #endif
+#include <stdio.h>
+#include <SDL.h>
+#include <SDL2_gfxPrimitives.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include <math.h>
 #include <sys/time.h>
-#include <math.h>
+#include <time.h>
 #include <string.h>
 #include "map.h"
 #include "attack.h"
@@ -16,6 +18,7 @@
 #include "users_and_scores.h"
 #include "primary_pages.h"
 #include "play_page.h"
+
 int main() {
     // error handling
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER) < 0) {
@@ -33,9 +36,11 @@ int main() {
         rank_page(sdlRenderer);
     if(shallExit ==SDL_FALSE&& letsplay){
         chose_map(sdlRenderer);
-        play(sdlRenderer);}
+        play(sdlRenderer);
+    }
 
     SDL_DestroyWindow(sdlWindow);
     SDL_Quit();
+
     return 0;
 }

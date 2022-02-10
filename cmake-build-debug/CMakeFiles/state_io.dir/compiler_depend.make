@@ -335,12 +335,12 @@ CMakeFiles/state_io.dir/src/main.c.obj: ../src/main.c \
   ../sdl2/sdl2-include/SDL_system.h \
   ../sdl2/sdl2-include/SDL_timer.h \
   ../sdl2/sdl2-include/SDL_version.h \
-  ../sdl2/sdl2-gfx-include/SDL2_gfxPrimitives.h \
-  D:/programs/CLion\ 2021.3.1/bin/mingw/x86_64-w64-mingw32/include/math.h \
   D:/programs/CLion\ 2021.3.1/bin/mingw/x86_64-w64-mingw32/include/stdio.h \
   D:/programs/CLion\ 2021.3.1/bin/mingw/x86_64-w64-mingw32/include/corecrt_stdio_config.h \
   D:/programs/CLion\ 2021.3.1/bin/mingw/x86_64-w64-mingw32/include/swprintf.inl \
   D:/programs/CLion\ 2021.3.1/bin/mingw/x86_64-w64-mingw32/include/sec_api/stdio_s.h \
+  ../sdl2/sdl2-gfx-include/SDL2_gfxPrimitives.h \
+  D:/programs/CLion\ 2021.3.1/bin/mingw/x86_64-w64-mingw32/include/math.h \
   D:/programs/CLion\ 2021.3.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/stdbool.h \
   D:/programs/CLion\ 2021.3.1/bin/mingw/x86_64-w64-mingw32/include/sys/time.h \
   D:/programs/CLion\ 2021.3.1/bin/mingw/x86_64-w64-mingw32/include/time.h \
@@ -896,6 +896,7 @@ CMakeFiles/state_io.dir/src/potions.c.obj: ../src/potions.c \
   ../src/potions.h
 
 CMakeFiles/state_io.dir/src/primary_pages.c.obj: ../src/primary_pages.c \
+  D:/programs/CLion\ 2021.3.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/stdbool.h \
   ../sdl2/sdl2-include/SDL.h \
   ../sdl2/sdl2-include/SDL_main.h \
   ../sdl2/sdl2-include/SDL_stdinc.h \
@@ -1063,18 +1064,9 @@ CMakeFiles/state_io.dir/src/primary_pages.c.obj: ../src/primary_pages.c \
   D:/programs/CLion\ 2021.3.1/bin/mingw/x86_64-w64-mingw32/include/corecrt_stdio_config.h \
   D:/programs/CLion\ 2021.3.1/bin/mingw/x86_64-w64-mingw32/include/swprintf.inl \
   D:/programs/CLion\ 2021.3.1/bin/mingw/x86_64-w64-mingw32/include/sec_api/stdio_s.h \
-  D:/programs/CLion\ 2021.3.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/stdbool.h \
-  D:/programs/CLion\ 2021.3.1/bin/mingw/x86_64-w64-mingw32/include/sys/time.h \
-  D:/programs/CLion\ 2021.3.1/bin/mingw/x86_64-w64-mingw32/include/time.h \
-  D:/programs/CLion\ 2021.3.1/bin/mingw/x86_64-w64-mingw32/include/_timeval.h \
-  D:/programs/CLion\ 2021.3.1/bin/mingw/x86_64-w64-mingw32/include/sys/timeb.h \
-  D:/programs/CLion\ 2021.3.1/bin/mingw/x86_64-w64-mingw32/include/sec_api/sys/timeb_s.h \
-  D:/programs/CLion\ 2021.3.1/bin/mingw/x86_64-w64-mingw32/include/pthread_time.h \
   D:/programs/CLion\ 2021.3.1/bin/mingw/x86_64-w64-mingw32/include/string.h \
   D:/programs/CLion\ 2021.3.1/bin/mingw/x86_64-w64-mingw32/include/sec_api/string_s.h \
   ../src/map.h \
-  ../src/attack.h \
-  ../src/potions.h \
   ../src/users_and_scores.h \
   ../src/primary_pages.h
 

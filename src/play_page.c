@@ -40,7 +40,6 @@ void play(SDL_Renderer *sdlRenderer){
     Uint32 potion_colors[4]={0xff3FF45B,0xffF43FAD,0xff0303FC,0xffF403FC};
     Sint16 x = (Sint16)(SCREEN_WIDTH/3), y = (Sint16)(SCREEN_HEIGHT/2);
     // initialize centers of hexagons & players
-    short num_player = 3;
     struct player player[num_player+1];
     player[0].point=score;
     short num_area=map.area;
@@ -92,6 +91,7 @@ void play(SDL_Renderer *sdlRenderer){
         gettimeofday(&te, NULL);
         long long milliseconds = te.tv_sec*1000LL + te.tv_usec/1000;
         if(milliseconds % 1000==0){
+            if(rand()%4==0)
             //create coordinate & kind of potions randomly
             random_potion(num_area,area,potion_head);
         }
@@ -126,7 +126,7 @@ void play(SDL_Renderer *sdlRenderer){
         }
         stringRGBA(sdlRenderer,(Sint16)(SCREEN_WIDTH*3/4),SCREEN_HEIGHT-27,"GREEN POTION: ENEMIES CANT ATTACK",255,255,255, 0xff);
         stringRGBA(sdlRenderer,(Sint16)(SCREEN_WIDTH*3/4),SCREEN_HEIGHT-27*2,"PURPLE POTION:  YOR VELOCITY * 2",255,255,255, 0xff);
-        stringRGBA(sdlRenderer,(Sint16)(SCREEN_WIDTH*3/4),SCREEN_HEIGHT-27*3,"RED POTION: OPPONENT SPEED /2",255,255,255, 0xff);
+        stringRGBA(sdlRenderer,(Sint16)(SCREEN_WIDTH*3/4),SCREEN_HEIGHT-27*3,"PINK:PRODUCING SOLDERS TIME RATE/2",255,255,255, 0xff);
         stringRGBA(sdlRenderer,(Sint16)(SCREEN_WIDTH*3/4),SCREEN_HEIGHT-27*4,"RED POTION: OPPONENT SPEED /2",255,255,255, 0xff);
 
         //draw number of barracks solders

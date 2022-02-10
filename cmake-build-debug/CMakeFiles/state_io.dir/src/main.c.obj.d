@@ -161,12 +161,12 @@ CMakeFiles/state_io.dir/src/main.c.obj: \
  D:/project1400/project-asemanehnafe/sdl2/sdl2-include/SDL_system.h \
  D:/project1400/project-asemanehnafe/sdl2/sdl2-include/SDL_timer.h \
  D:/project1400/project-asemanehnafe/sdl2/sdl2-include/SDL_version.h \
- D:/project1400/project-asemanehnafe/sdl2/sdl2-gfx-include/SDL2_gfxPrimitives.h \
- D:/programs/CLion\ 2021.3.1/bin/mingw/x86_64-w64-mingw32/include/math.h \
  D:/programs/CLion\ 2021.3.1/bin/mingw/x86_64-w64-mingw32/include/stdio.h \
  D:/programs/CLion\ 2021.3.1/bin/mingw/x86_64-w64-mingw32/include/corecrt_stdio_config.h \
  D:/programs/CLion\ 2021.3.1/bin/mingw/x86_64-w64-mingw32/include/swprintf.inl \
  D:/programs/CLion\ 2021.3.1/bin/mingw/x86_64-w64-mingw32/include/sec_api/stdio_s.h \
+ D:/project1400/project-asemanehnafe/sdl2/sdl2-gfx-include/SDL2_gfxPrimitives.h \
+ D:/programs/CLion\ 2021.3.1/bin/mingw/x86_64-w64-mingw32/include/math.h \
  D:/programs/CLion\ 2021.3.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/stdbool.h \
  D:/programs/CLion\ 2021.3.1/bin/mingw/x86_64-w64-mingw32/include/sys/time.h \
  D:/programs/CLion\ 2021.3.1/bin/mingw/x86_64-w64-mingw32/include/time.h \

@@ -12,6 +12,7 @@ extern char text[100];
 extern int score;
 extern SDL_bool second;
 extern SDL_bool see_rank;
+extern short num_player;
 SDL_Texture *getImageTexture(SDL_Renderer *sdlRenderer, char *image_path) ;
 
 void first_page(SDL_Renderer *sdlRenderer);

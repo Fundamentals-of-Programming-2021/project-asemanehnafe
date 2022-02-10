@@ -1,2 +1,10 @@
 asemaneh
 100
+0
+100
+asemaneh nafe
+-1
+0
+-1
+asemaneh nahe
+0

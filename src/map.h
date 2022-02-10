@@ -25,7 +25,7 @@ struct player{
     short num_center;
     short centers[2][100];
     short velocity;
-    bool can_attack_to;
+    SDL_bool can_attack_to;
     short produce_solders_timerate;
     bool potioned;
 };

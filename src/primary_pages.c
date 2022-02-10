@@ -1,18 +1,11 @@
-//
-// Created by ASUS on 2/10/2022.
-//
+#include <stdbool.h>
 #include <SDL.h>
 #include <SDL2_gfxPrimitives.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
-#include <math.h>
-#include <sys/time.h>
 #include <math.h>
 #include <string.h>
 #include "map.h"
-#include "attack.h"
-#include "potions.h"
 #include "users_and_scores.h"
 #include "primary_pages.h"
  SDL_bool letsplay=SDL_FALSE;
@@ -22,6 +15,7 @@
 int score;
 SDL_bool second=SDL_FALSE;
 SDL_bool see_rank=SDL_FALSE;
+short num_player;
 SDL_Texture *getImageTexture(SDL_Renderer *sdlRenderer, char *image_path) {
     SDL_Surface *image = SDL_LoadBMP(image_path);
 
@@ -86,6 +80,7 @@ void first_page(SDL_Renderer *sdlRenderer){
     score=check_user(text);
 
 }
+
 void menu(SDL_Renderer *sdlRenderer){
 
     SDL_Texture *sdlTexture_second = getImageTexture(sdlRenderer, "second_page.bmp");
@@ -169,6 +164,86 @@ void rank_page(SDL_Renderer *sdlRenderer){
         SDL_Delay(1000 / FPS);
     }
 }
+void getrandom(SDL_Renderer *sdlRenderer){
+    SDL_bool got=SDL_FALSE;
+        SDL_Texture *sdlTexture = getImageTexture(sdlRenderer, "randomget_page.bmp");
+        SDL_Rect texture_rect = {.x=0, .y=0, .w=SCREEN_WIDTH, .h=SCREEN_HEIGHT};
+        int len=0;
+        char temp[100];
+        for(int i=0;i<100;i++){
+            temp[i]='\0';
+        }
+        while (shallExit==SDL_FALSE && got==SDL_FALSE){
+            SDL_RenderCopy(sdlRenderer, sdlTexture, NULL, &texture_rect);
+            //SDL_RenderClear(sdlRenderer);
+            // listen for key events
+            SDL_Event sdlEvent;
+            while (SDL_PollEvent(&sdlEvent)) {
+                switch (sdlEvent.type) {
+                    case SDL_QUIT:
+                        shallExit = SDL_TRUE;
+                        SDL_DestroyRenderer(sdlRenderer);
+                        SDL_DestroyTexture(sdlTexture);
+                        break;
+                    case SDL_KEYDOWN:
+                        if(sdlEvent.key.keysym.sym == SDLK_RETURN||sdlEvent.key.keysym.sym == SDLK_KP_ENTER){
+                            SDL_DestroyTexture(sdlTexture);
+                            got = SDL_TRUE;
+                        }
+                        else if(sdlEvent.key.keysym.sym == SDLK_BACKSPACE && len) {
+                            len--;
+                            temp[len]='\0';
+                        }
+                        break;
+                    case SDL_TEXTINPUT:
+                        // Add new text onto the end of our text
+                        temp[len]=*sdlEvent.text.text;
+                        len ++;
+                        break;
+                }
+            }
+            stringRGBA(sdlRenderer,350,275,"Enter area number and player number whit an space between them, then press Enter",255,165,0,255);
+            stringRGBA(sdlRenderer,350,295,"or write a '+' then choose the number of past random map which is saved ",255,165,0,255);
+            stringRGBA(sdlRenderer,500,325,temp,255,165,0,255);
+            SDL_RenderPresent(sdlRenderer);
+            SDL_Delay(1000 / FPS);
+        }
+        //change text to number
+        if(temp[0]=='+'){
+            int map_number=0;
+            for(int x=1;temp[x] != '\0';x++){
+                map_number*=10;
+                map_number=(short)(temp[x])-48+map_number;
+            }
+            FILE *file= fopen("radom_maps.txt","r");
+            for( int i=0;i<map_number;i++){
+                fscanf(file,"%hd %hd %d",&map.area,&num_player,&map.seed);
+            }
+            printf("%hd %hd %hd",map.area,num_player,map.seed);
+            fclose(file);
+
+        }else{
+            map.area=0;
+            num_player=0;
+            int x ;
+            for(x=0;temp[x] != ' ';x++){
+                map.area*=10;
+                map.area=(short)(temp[x])-48+map.area;
+            }
+            x++;
+            for(;temp[x] != '\0';x++){
+                num_player*=10;
+                num_player=(short)temp[x]-48+num_player;
+            }
+            time_t t1;
+            srand ( &t1);
+            map.seed=rand();
+            //save area player seed
+            FILE *file= fopen("radom_maps.txt","a+");
+            fprintf(file,"\n%hd %hd %d",map.area,num_player,map.seed);
+            fclose(file);
+            }
+}
 void chose_map(SDL_Renderer *sdlRenderer){
     //create texture for choose_map page
     SDL_Texture *sdlTexture_map = getImageTexture(sdlRenderer, "choosemap.bmp");
@@ -217,10 +292,9 @@ void chose_map(SDL_Renderer *sdlRenderer){
                     }
                     else if (sdlEvent.button.x < 749&& sdlEvent.button.x > 483&&
                              sdlEvent.button.y < 400 && sdlEvent.button.y >255) {
-                        time_t t1;
-                        srand ( &t1);
-                        map.seed=rand();
-                        map.area=50;
+                        getrandom(sdlRenderer);
+
+
                         mapbool=SDL_TRUE;
                         SDL_DestroyTexture(sdlTexture_map);
                     }
