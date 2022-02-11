@@ -23,7 +23,8 @@ int check_user(char text[100]){
     }
     /* Assuming that user.txt has content
     in below format
-    NAME point
+    NAME
+    point
     asemane
     12
     amirali

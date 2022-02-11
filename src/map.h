@@ -11,8 +11,6 @@ struct area{
     bool attacker;
 };
 
-
-
 struct player{
     Uint32 color;
     SDL_bool live;
@@ -24,11 +22,10 @@ struct player{
     short produce_solders_timerate;
     bool potioned;
     bool move;
-    bool power;
     bool bimax_solder;
+    bool increase;
+    bool power;
 };
-
-void print();
 void draw_hexagon(SDL_Renderer *sdlRenderer,Sint16 x,Sint16 y, Uint32 color);
 void centers_of_hexagonals(int numarea, struct area area[numarea], Sint16 x, Sint16 y, int numplayer, struct player player[],int seed);
 #endif //STATE_IO_MAP_H

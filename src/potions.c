@@ -26,7 +26,7 @@ void random_potion(short num_area,struct area area[num_area],struct potion* poti
     new_potion->y=(area[first].y+area[second].y)/2;
     new_potion->timer=2000;
     new_potion->active=false;
-    new_potion->ID=rand()%6;
+    new_potion->ID=rand()%8;
     new_potion->next=NULL;
     potion->next=new_potion;
     //double distance=sqrt((area[first].x - area[second].x) * (area[first].x - area[second].x) + (area[first].y - area[second].y)*(area[first].y  - area[second].y));
@@ -48,8 +48,6 @@ void deactivate_potion(struct potion* potion_head,struct player player[],struct 
         if(potion_head->active==true)
             potion_head->timer--;
         if ( potion_head->timer == 0 && potion_head->active == true){
-            player[potion_head->playerID].power=false;
-
             switch (potion_head->ID) {
                 //players potions
                 //first potion
@@ -78,9 +76,12 @@ void deactivate_potion(struct potion* potion_head,struct player player[],struct 
                 case 5:
                     player[potion_head->playerID].bimax_solder=false;
                     break;
-/*                case 6:
+                case 6:
+                    player[potion_head->playerID].increase=false;
+                    break;
+                case 7:
                     player[potion_head->playerID].power=false;
-                    break;*/
+                    break;
             }
             player[potion_head->playerID].potioned=false;
             potion_head=temp;
@@ -90,8 +91,6 @@ void deactivate_potion(struct potion* potion_head,struct player player[],struct 
 }
 void activate_potion(struct player player[],struct area area[],struct potion* potion,short num_player,short player_ID,short area_num){
     potion->active=true;
-    player[player_ID].power=true;
-
     switch(potion->ID){
         //players potions
         //first potion: *1.5 player velocity_Purple
@@ -121,9 +120,12 @@ void activate_potion(struct player player[],struct area area[],struct potion* po
         case 5:
             player[player_ID].bimax_solder=true;
             break;
-/*        case 6:
-            player[player_ID].power=true;
-            break;*/
+        case 6:
+            player[player_ID].increase=true;
+            break;
+        case 7:
+            break;
+
     }
 
 }

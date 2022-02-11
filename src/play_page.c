@@ -53,8 +53,11 @@ void play(SDL_Renderer *sdlRenderer){
         player[i].can_attack_to=true;
         player[i].produce_solders_timerate=100;
         player[i].potioned=false;
-        player[i].power=false;
+        player[i].increase=false;
         player[i].bimax_solder=false;
+        player[i].power=false;
+        player[i].move=true;
+
     }
 
     //the last player is always neutral
@@ -64,8 +67,11 @@ void play(SDL_Renderer *sdlRenderer){
     player[num_player].velocity=0;
     player[num_player].produce_solders_timerate=100;
     player[num_player].num_center=0;
-    player[num_player].power=false;
+    player[num_player].increase=false;
     player[num_player].bimax_solder=false;
+    player[num_player].power=false;
+    player[num_player].move=false;
+
 
 
     centers_of_hexagonals(num_area,area,x,y,num_player, player,map.seed);
@@ -134,8 +140,8 @@ void play(SDL_Renderer *sdlRenderer){
         stringRGBA(sdlRenderer,(Sint16)(SCREEN_WIDTH*3/4),SCREEN_HEIGHT-27*3,"PINK:PRODUCING SOLDERS TIME RATE/2",255,255,255, 0xff);
         stringRGBA(sdlRenderer,(Sint16)(SCREEN_WIDTH*3/4),SCREEN_HEIGHT-27*4,"RED POTION: OPPONENT SPEED /2",255,255,255, 0xff);
         stringRGBA(sdlRenderer,(Sint16)(SCREEN_WIDTH*3/4),SCREEN_HEIGHT-27*5,"YELLOW POTION: YOU CAN'T MOVE",255,255,255, 0xff);
-        stringRGBA(sdlRenderer,(Sint16)(SCREEN_WIDTH*3/4),SCREEN_HEIGHT-27*6,"BLUE POTION :ALWAYS PRODUCE ",255,255,255, 0xff);
-        stringRGBA(sdlRenderer,(Sint16)(SCREEN_WIDTH*3/4),SCREEN_HEIGHT-27*7,"ORANGE POTION : INCREASE IN ATTACK",255,255,255, 0xff);
+        stringRGBA(sdlRenderer,(Sint16)(SCREEN_WIDTH*3/4),SCREEN_HEIGHT-27*6,"ORANGE POTION :ALWAYS PRODUCE ",255,255,255, 0xff);
+        stringRGBA(sdlRenderer,(Sint16)(SCREEN_WIDTH*3/4),SCREEN_HEIGHT-27*7,"BLUE POTION : INCREASE IN ATTACK",255,255,255, 0xff);
         stringRGBA(sdlRenderer,(Sint16)(SCREEN_WIDTH*3/4),SCREEN_HEIGHT-27*8,"DARKBLUE POTION : YOUR POWER * 2",255,255,255, 0xff);
 
         //draw number of barracks solders
@@ -179,7 +185,7 @@ void play(SDL_Renderer *sdlRenderer){
                                 first_click = SDL_FALSE;
                                 add_at_tail(head, &area[origin], &area[i]);
                             }else if(first_click==SDL_FALSE) {
-                                if ( area[i].playerID != num_player) {
+                                if ( area[i].playerID == 0) {
                                     first_click = SDL_TRUE;
                                     origin = i;
                                 }

@@ -61,11 +61,9 @@ void centers_of_hexagonals(int numarea, struct area area[numarea], Sint16 x, Sin
                 area[i].attacker=false;
                 area[i].defender=false;
                 player[produced_player].num_center++;
-
                 player[produced_player].centers[0][produced_player]=x;
                 player[produced_player].centers[1][produced_player]=y;
                 player[produced_player].num_center=1;
-                player[produced_player].move=true;
                 produced_player++;
             }else{
                 area[i].playerID=numplayer;
@@ -73,7 +71,6 @@ void centers_of_hexagonals(int numarea, struct area area[numarea], Sint16 x, Sin
                 area[i].attacker=false;
                 area[i].defender=false;
                 player[numplayer].num_center++;
-                player[produced_player].move=false;
             }
             i++;
             for(int n=0; n<6; n++){

@@ -7,11 +7,12 @@
 #include <stdlib.h>
 #include <math.h>
 
-void produce_solder(struct attack* head){
+void produce_solder(struct attack* head,struct player player[]){
     if(head-> origin->solders >= 0 ){
         head->solder[head->number_solders_inattack].x=head->origin->x;
         head->solder[head->number_solders_inattack].y=head->origin->y;
         head->solder[head->number_solders_inattack].live=true;
+        head->solder[head->number_solders_inattack].power= player[head->playerID].power;
         head -> number_solders_inattack++;
     }
 }
@@ -37,15 +38,21 @@ void delete(struct attack* head){
         free(temp);
     }
 }
-void crash( struct attack* head){
-
+void crash( struct attack* head, struct player player[]){
     for(struct attack* temp=head->next; temp!=NULL; temp=temp->next){
         if(head->playerID!= temp->playerID){
             for(short i=0;i < head->number_solders_inattack;i++){
                 for(short j=0; j < temp->number_solders_inattack;j++){
-                    if(head->solder[i].live==true&&temp->solder[j].live==true&&(head->solder[i].x - temp -> solder[j].x)*(head->solder[i].x - temp -> solder[j].x)+ (head->solder[i].y - temp -> solder[j].y )*(head->solder[i].y - temp -> solder[j].y )<30 ){
-                        head->solder[i].live=false;
-                        temp->solder[j].live=false;
+                    if(head->solder[i].live==true&&temp->solder[j].live==true&&(head->solder[i].x - temp -> solder[j].x)*(head->solder[i].x - temp -> solder[j].x)+ (head->solder[i].y - temp -> solder[j].y )*(head->solder[i].y - temp -> solder[j].y )<35
+                            ){
+                        if(head->solder[i].power==false || player[head->playerID].power ==false ){
+                            head->solder[i].live=false;
+                        }
+                        if(temp->solder[j].power==false||  player[temp->playerID].power ==false ){
+                            temp->solder[j].live=false;
+                        }
+                        head->solder[i].power=false;
+                        temp->solder[j].power=false;
                     }
                 }
             }
@@ -58,7 +65,7 @@ void attack(struct attack* head,struct player player[]){
         head=head->next;
         head->timer--;
         if(head->timer==0 && head->number_solders_inattack != head->number_solders_should_attack){
-            produce_solder(head);
+            produce_solder(head,player);
             head->timer=10;
         }
 
@@ -67,7 +74,7 @@ void attack(struct attack* head,struct player player[]){
             head->Destination->defender=true;
         }
         //check for
-        crash(head);
+        crash(head,player);
         for (int i = 0; i < head->number_solders_inattack; i++) {
             //printf(" %d  ",player[head->origin->playerID].velocity);
             if(player[head->playerID].move){
@@ -85,11 +92,14 @@ void attack(struct attack* head,struct player player[]){
                             player[head->origin->playerID].num_center++;
                             player[head->Destination->playerID].num_center--;
                             head->Destination->playerID = head->playerID;
-
                             head->Destination->solders++;
                         }
                         else{
-                            head->Destination->solders--;
+                            if(player[head->Destination->playerID].increase==false){
+                                head->Destination->solders--;
+                            }else{
+                                head->Destination->solders++;
+                            }
                         }
 
                     } else {
